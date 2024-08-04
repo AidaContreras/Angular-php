@@ -45,7 +45,6 @@ app.controller('MainController', function($scope, $http) {
         $http.post('api/action.php', data, config)
         .then(function(response) {
             if (response.data.error != '') {
-                console.log('response', response.data.error)
                 Swal.fire({
                     title: 'Verificar los siguientes campos: ',
                     text: response.data.error,
@@ -66,8 +65,6 @@ app.controller('MainController', function($scope, $http) {
 	};
 
     $scope.editProduct = function(item){
-        $scope.itemBackup = item
-        console.log('backup', $scope.itemBackup)
         $scope.backupProducto = angular.copy(item);
         item.editar = true;
         $scope.modoEdicion = true
@@ -89,7 +86,6 @@ app.controller('MainController', function($scope, $http) {
                 'Content-Type': 'application/json;charset=utf-8;'
             }
         };
-        console.log('data', data, config)
 
         $http.post('api/action.php', data, config)
         .then(function(response) {
