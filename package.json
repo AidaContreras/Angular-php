@@ -1,0 +1,18 @@
+{
+  "name": "angularprueba",
+  "version": "1.0.0",
+  "description": "Prueba técnica de Angular con php",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "http-server ./ -a localhost -p 8080"
+  },
+  "keywords": [],
+  "author": "Aida Contreras",
+  "license": "ISC",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.6.0",
+    "angular": "^1.8.3",
+    "sweetalert2": "^11.12.4"
+  }
+}

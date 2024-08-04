@@ -1,0 +1,12 @@
+{
+    "require": {
+        "slim/slim": "^4.14",
+        "guzzlehttp/psr7": "^2.7",
+        "nyholm/psr7": "^1.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "Controller\\": "api/Controller/"
+        }
+    }
+}

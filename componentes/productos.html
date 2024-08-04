@@ -1,0 +1,96 @@
+<div class="container my-4">
+    <h2 class="text-center text-primary mb-4">Prueba técnica CRUD Productos</h2>
+    <div ng-controller="MainController" ng-init="listProducts()">
+        <div class="shadow-lg p-3 mb-5 bg-body rounded">
+            <div class="p-1">
+                <h3>Registrar producto</h3>
+            </div>
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <label for="code_producto">Código producto</label>
+                    <input type="text" class="form-control" id="code_producto" ng-model="producto.code"
+                        ng-disabled="modoEdicion">
+                </div>
+                <div class="col-md-3">
+                    <label for="nombre_producto">Nombre producto</label>
+                    <input type="text" class="form-control" id="nombre_producto" ng-model="producto.name"
+                        ng-disabled="modoEdicion">
+                </div>
+                <div class="col-md-3">
+                    <label for="categoria">Categoría</label>
+                    <select class="form-control" id="categoria" ng-model="producto.category" ng-disabled="modoEdicion">
+                        <option value="">Seleccionar</option>
+                        <option ng-repeat="item in categoria" value="{{item.id}}">{{ item.name }}</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="precio_producto">Precio</label>
+                    <input type="number" class="form-control" id="precio_producto" ng-model="producto.price" required
+                        ng-disabled="modoEdicion">
+                </div>
+            </div>
+            <div class="d-flex justify-content-end mb-4">
+                <button type="button" class="btn btn-dark" ng-click="addProduct()"
+                    ng-disabled="modoEdicion">Agregar</button>
+            </div>
+        </div>
+
+        <div class="alert alert-success alert-dismissible" ng-show="message">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" ng-click="closeMessage()"
+                aria-label="Close"></button>
+            {{successMessage}}
+        </div>
+
+        <div class="shadow-lg p-3 mb-5 bg-body rounded">
+            <div>
+                <h4 class="text-center">Lista de productos</span>
+            </div>
+            <table class="table table-hover">
+                <thead class="thead-dark text-center">
+                    <tr>
+                        <th scope="col">Código</th>
+                        <th scope="col">Producto</th>
+                        <th scope="col">Categoría</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="producto in productos" ng-init="paso = $index">
+                    <tr ng-show="!producto.editar">
+                        <th scope="row">{{ producto.code }}</th>
+                        <td>{{ producto.name }}</td>
+                        <td>{{ producto.categoria }}</td>
+                        <td>{{ producto.price }}</td>
+                        <td class="text-center">
+                            <button class="btn btn-outline-primary btn-sm" ng-click="editProduct(producto)"
+                                ng-disabled="producto.editar || modoEdicion"><i class="fas fa-pencil-alt"></i></button>
+                            <button class="btn btn-outline-danger btn-sm" ng-click="deleteProduct(producto.code)"
+                                ng-disabled="producto.editar || modoEdicion"><i class="fas fa-trash-alt"></i></button>
+                        </td>
+                    </tr>
+
+                    <tr ng-show="producto.editar">
+                        <th scope="row">{{ producto.code }}</th>
+                        <td class="text-center w-20">
+                            <input type="text" class="form-control" ng-model="producto.name">
+                        </td>
+                        <td class="text-center w-20">
+                            <select class="form-control" name="mySelect" id="mySelect"
+                                ng-options="item.id as item.name for item in categoria"
+                                ng-model="producto.category"></select>
+                        </td>
+                        <td class="text-center w-20">
+                            <input type="number" class="form-control" step="0.01" ng-model="producto.price">
+                        </td>
+                        <td class="text-center">
+                            <button class="btn btn-outline-success btn-sm" ng-click="saveProduct(producto)"
+                                ng-disabled="!producto.editar"><i class="fas fa-save"></i></button>
+                            <button class="btn btn-outline-warning btn-sm" ng-click="cancelProduct(producto)"
+                                ng-disabled="!producto.editar"><i class="fas fa-ban"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
